@@ -26,6 +26,7 @@ class CartItem extends Component{
 
 //removes item with that key
   removeItem = (key) => {
+
     this.setState(prevState => {
       let cartItems = [...prevState.cartItems];
       cartItems.splice(key, 1);

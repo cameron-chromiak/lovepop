@@ -55,7 +55,7 @@ class Products extends Component{
   render(){
 
     let {suggestedProducts} = this.state
-    console.log(suggestedProducts);
+    // console.log(suggestedProducts);
 
     return(
       <div>
