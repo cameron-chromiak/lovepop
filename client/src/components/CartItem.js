@@ -11,8 +11,6 @@ class CartItem extends Component{
     cartTotal: 0
   }
 
-
-
   componentDidMount(){
       axios.get(`${apiURL}`, 'hey')
       .then(res =>{
@@ -20,22 +18,27 @@ class CartItem extends Component{
         this.setState({cartItems: res.data.cart.cart.lineItems})
         // then send tags to parent
         // console.log(this.state.cartItems);
-        this.props.getTags(this.state.cartItems.map(item =>{
-          return item.tags
-        }))
+        this.getTags()
       })
       .catch(err => console.log(err))
   }
 
+
+//removes item with that key
   removeItem = (key) => {
     this.setState(prevState => {
       let cartItems = [...prevState.cartItems];
       cartItems.splice(key, 1);
-
       return {cartItems};
     })
+    this.getTags()
   }
 
+  getTags = () =>{
+    this.props.getTags(this.state.cartItems.map(item =>{
+      return item.tags
+    }))
+  }
 
 
   render(){
