@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 
-
 import CartItem from './components/CartItem'
 import Products from './components/Products'
 
@@ -9,8 +8,8 @@ class App extends Component {
 
   state={
     tags: [],
-    cartTotal: 0
-
+    cartTotal: 0,
+    newCartItem: []
   }
 
 //Tags from items in cart
@@ -19,16 +18,20 @@ class App extends Component {
     this.setState({tags})
   }
 
+  //pass new item from <Products> to <CartItem>
+  sendItemToCart = (item) =>{
+    this.setState({newCartItem: item}
+    )
+  }
+
 
 
   render() {
 
-
-
     return (
       <div className="App ui grid">
-          <CartItem getTags={this.getCartItemTags}/>
-          <Products productTags={this.state.tags}/>
+          <CartItem newItems={this.state.newCartItem}  getTags={this.getCartItemTags}/>
+          <Products sendItemToApp={this.sendItemToCart} productTags={this.state.tags}/>
       </div>
     );
   }

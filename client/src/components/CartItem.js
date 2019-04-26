@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
+//This component contains active cart Items
 
+//apiURL for axios request kept in seperate file
 import {apiURL} from '../API'
 
 class CartItem extends Component{
@@ -26,12 +28,12 @@ class CartItem extends Component{
   }
 
 
-//removes item with that key
+//removes item with that key the returns remaing tags to getTags() to update suggested products
   removeItem = (key) => {
     this.setState(prevState => {
-      let cartItems = [...prevState.cartItems];
+      let cartItems = [...prevState.cartItems]
       cartItems.splice(key, 1);
-      return {cartItems};
+      return {cartItems}
     }, () =>{
       this.props.getTags(this.state.cartItems.map(item =>{
         return item.tags
@@ -43,10 +45,12 @@ class CartItem extends Component{
   }
 
     getTotalPrice = () => {
-
       // set cart total to cartTotal
       let cartTotal = 0
       this.state.cartItems.map(item =>{
+        if(typeof(cartTotal) === 'Nan'){
+          cartTotal = cartTotal
+        }
         return cartTotal = cartTotal + Number(item.price)
       })
 
@@ -56,8 +60,11 @@ class CartItem extends Component{
 
     }
 
+    // if price > FREE_SHIPPING_PRICE, free shippig
     renderFreeShipping(){
-      if(this.state.cartTotal > 10000){
+      let FREE_SHIPPING_PRICE = 10000
+
+      if(this.state.cartTotal > FREE_SHIPPING_PRICE){
         return(
           <div className='ui red tag label'>Free Shipping!</div>
         )
@@ -65,7 +72,7 @@ class CartItem extends Component{
     }
 
   render(){
-
+    //Get items in cart to map and render
     let {cartItems} = this.state
 
     return(
