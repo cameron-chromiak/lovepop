@@ -24,17 +24,21 @@ class Products extends Component{
 
   showRecommendedProducts = () =>{
     let items = this.state.items
+    let tags = this.state.tags
     let products = []
-    console.log(items);
+    let allTags =[]
+
+    tags.forEach(array =>{
+      allTags.push(...array)
+    })
 
     for(var key in items){
-
       let obj = items[key]
-      for(var prop in obj){
-        console.log(obj.tags);
+        if(allTags.some(r=> obj.tags.includes(r))){
+          products.push(obj)
+        }
       }
-    }
-
+      console.log(products);
   }
 
 
