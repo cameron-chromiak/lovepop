@@ -17,8 +17,9 @@ class CartItem extends Component{
         //set state with cart items returned from axios geg
         this.setState({cartItems: res.data.cart.cart.lineItems})
         // then send tags to parent
-        // console.log(this.state.cartItems);
-        this.getTags()
+        this.props.getTags(this.state.cartItems.map(item =>{
+          return item.tags
+        }))
       })
       .catch(err => console.log(err))
   }
@@ -26,20 +27,20 @@ class CartItem extends Component{
 
 //removes item with that key
   removeItem = (key) => {
-
     this.setState(prevState => {
       let cartItems = [...prevState.cartItems];
       cartItems.splice(key, 1);
       return {cartItems};
+    }, () =>{
+      this.props.getTags(this.state.cartItems.map(item =>{
+        return item.tags
+      }))
     })
-    this.getTags()
+
   }
 
-  getTags = () =>{
-    this.props.getTags(this.state.cartItems.map(item =>{
-      return item.tags
-    }))
-  }
+
+
 
 
   render(){

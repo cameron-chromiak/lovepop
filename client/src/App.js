@@ -13,6 +13,7 @@ class App extends Component {
 
 //Tags from items in cart
   getCartItemTags = (tags) =>{
+    console.log(tags);
     this.setState({tags})
   }
 
