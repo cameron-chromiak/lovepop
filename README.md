@@ -1,5 +1,5 @@
-###Cameron Chromiak
-####Lovepop
+#### Cameron Chromiak
+##### Lovepop
 
 
 ##Set up
@@ -21,3 +21,5 @@ Uses React and Node
 A shopping cart, it shows related items based on the tags of items currently
 in the cart. You can remove items and the recommended items will update.
 Unfortunately, do to time, the add items was not full working, it was very buggy.
+
+I originally planned to use Express/Handlebars but decide to go with React just for practice.
