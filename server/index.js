@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
@@ -15,13 +14,14 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 
 
-app.post('/', (req, res)=>{
+app.get('/', (req, res)=>{
   res.json({cart})
 })
 
-//Body Parser
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.get('/products', (req, res)=>{
+  res.json({products})
+})
+
 
 
 

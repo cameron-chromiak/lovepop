@@ -7,15 +7,20 @@ import Products from './components/Products'
 
 class App extends Component {
 
-  state={}
+  state={
+    tags: []
+  }
 
+  getCartItemTags = (tags) =>{
+    this.setState({tags})
+  }
 
 
   render() {
     return (
       <div className="App ui grid">
-          <CartItem/>
-          {/*<Products/>*/}
+          <CartItem getTags={this.getCartItemTags}/>
+          <Products productTags={this.state.tags}/>
       </div>
     );
   }
