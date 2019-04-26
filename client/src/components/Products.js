@@ -24,14 +24,15 @@ class Products extends Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log(nextProps.productTags);
-    this.setState({tags: nextProps.productTags})
-    this.showRecommendedProducts()
+    this.setState({tags: nextProps.productTags}, ()=>{
+      this.showRecommendedProducts()
+    })
+
  }
 
   showRecommendedProducts = () =>{
     let items = this.state.items
-    let tags = this.state.tags
+    let tags = [...this.state.tags]
     let products =[]
     let allTags =[]
 
@@ -59,6 +60,7 @@ class Products extends Component{
 
     return(
       <div>
+      <h3>Recommend Products based off your selections</h3>
       <div className='six wide column'>{suggestedProducts.map((item, key) =>(
         <div className='ui segment' key={key}>
           <h4 className='ui header'>{item.name}</h4>

@@ -8,17 +8,23 @@ import Products from './components/Products'
 class App extends Component {
 
   state={
-    tags: []
+    tags: [],
+    cartTotal: 0
+
   }
 
 //Tags from items in cart
   getCartItemTags = (tags) =>{
-    console.log(tags);
+    // console.log(tags);
     this.setState({tags})
   }
 
 
+
   render() {
+
+
+
     return (
       <div className="App ui grid">
           <CartItem getTags={this.getCartItemTags}/>

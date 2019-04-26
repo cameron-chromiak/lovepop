@@ -20,6 +20,7 @@ class CartItem extends Component{
         this.props.getTags(this.state.cartItems.map(item =>{
           return item.tags
         }))
+        this.getTotalPrice()
       })
       .catch(err => console.log(err))
   }
@@ -34,14 +35,34 @@ class CartItem extends Component{
     }, () =>{
       this.props.getTags(this.state.cartItems.map(item =>{
         return item.tags
-      }))
+      })
+    )
+      this.getTotalPrice()
     })
 
   }
 
+    getTotalPrice = () => {
+
+      // set cart total to cartTotal
+      let cartTotal = 0
+      this.state.cartItems.map(item =>{
+        return cartTotal = cartTotal + Number(item.price)
+      })
+
+      //set cartTotal to state then pass to parent
+      this.setState({cartTotal})
 
 
+    }
 
+    renderFreeShipping(){
+      if(this.state.cartTotal > 10000){
+        return(
+          <div className='ui red tag label'>Free Shipping!</div>
+        )
+      }
+    }
 
   render(){
 
@@ -55,8 +76,10 @@ class CartItem extends Component{
           <button onClick={()=>this.removeItem(key)}>Remove</button>
         </div>))}
         <div className="ui label">
+                <h5>Free shipping on purchase of more than $10.00! What a deal, Wow woW wOw</h5>
           Total
           <div className="detail">{this.state.cartTotal}</div>
+          <div>{this.renderFreeShipping()}</div>
         </div>
       </div>
     )
